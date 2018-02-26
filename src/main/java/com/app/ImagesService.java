@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.commons.imaging.formats.jpeg.JpegImageMetadata;
 import org.apache.commons.imaging.formats.tiff.TiffImageMetadata;
+import org.apache.commons.imaging.formats.tiff.write.TiffOutputSet;
 import org.apache.sanselan.Sanselan;
 import org.apache.sanselan.common.IImageMetadata;
 
@@ -43,12 +44,12 @@ public interface ImagesService  {
 	
 	
 	/**
-	 * Method that copy important properties from the rawMap to a TiffImageMetadata
+	 * Method that copy important properties from the rawMap to a TiffOutputSet
 	 * 
 	 * 
-	 * @param TiffImageMetadata tiffImageMetadata, Map<Integer,Object> mapExif
-	 * @return TiffImageMetadata
+	 * @param TiffOutputSet tiffOutputSet, Map<Integer,Object> mapExif
+	 * @return TiffOutputSet
 	 */
-	public TiffImageMetadata mapperExifRawToExifJpg(TiffImageMetadata tiffImageMetadata, Map<Integer,Object> mapExif);
+	public TiffOutputSet mapperExifRawToExifJpg(TiffOutputSet tiffOutputSet, Map<Integer,Object> mapExif);
 
 	}

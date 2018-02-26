@@ -18,6 +18,7 @@ import org.apache.commons.imaging.formats.tiff.constants.ExifTagConstants;
 import org.apache.commons.imaging.formats.tiff.constants.Tiff4TagConstants;
 import org.apache.commons.imaging.formats.tiff.taginfos.TagInfoRational;
 import org.apache.commons.imaging.formats.tiff.write.TiffOutputDirectory;
+import org.apache.commons.imaging.formats.tiff.write.TiffOutputSet;
 
 public class ImagesImpl implements ImagesService {
 	
@@ -58,8 +59,7 @@ public class ImagesImpl implements ImagesService {
 	
 	public Map<Integer,Object> mapExif(TiffImageMetadata exif){
 	Map<Integer, Object> exifMap = new HashMap<Integer, Object>();
-	List<TiffField> tiffFieldList = exif.getAllFields();
-	
+	List<TiffField> tiffFieldList = exif.getAllFields();	
 	try {
 		for (TiffField tiffField : tiffFieldList) {
 			exifMap.put(tiffField.getTag(), tiffField.getValue());
@@ -71,17 +71,37 @@ public class ImagesImpl implements ImagesService {
 	return exifMap;
 	}
 
-	public TiffImageMetadata mapperExifRawToExifJpg(TiffImageMetadata tiffImageMetadata, Map<Integer, Object> mapExif) {
+	
+	public TiffOutputSet mapperExifRawToExifJpg(TiffOutputSet tiffOutputSet, Map<Integer, Object> mapExif) {
 		
 		TiffOutputDirectory exifDirectory;
 		try {
-			exifDirectory = tiffImageMetadata.getOutputSet().getOrCreateRootDirectory();
+			// Example of how to add a field/tag to the output set.
+            //
+            // Note that you should first remove the field/tag if it already
+            // exists in this directory, or you may end up with duplicate
+            // tags. See above.
+            //
+            // Certain fields/tags are expected in certain Exif directories;
+            // Others can occur in more than one directory (and often have a
+            // different meaning in different directories).
+            //
+            // TagInfo constants often contain a description of what
+            // directories are associated with a given tag.
+			exifDirectory = tiffOutputSet.getOrCreateExifDirectory();
 			exifDirectory.removeField(ExifTagConstants.EXIF_TAG_FNUMBER);
 			exifDirectory.add(ExifTagConstants.EXIF_TAG_FNUMBER, RationalNumber.valueOf(utilitiesServcie.getStringNumberWhenParenthesis(mapExif.get(33437).toString())));
+		
+			
+			exifDirectory = tiffOutputSet.getOrCreateRootDirectory();
+	        exifDirectory.removeField(ExifTagConstants.EXIF_TAG_SOFTWARE);
+	        exifDirectory.add(ExifTagConstants.EXIF_TAG_SOFTWARE, "SomeKind");
+			
+			
 		} catch (ImageWriteException e1) {
 			e1.printStackTrace();
 		}
-		return tiffImageMetadata;
+		return tiffOutputSet;
 	}
 
 }
