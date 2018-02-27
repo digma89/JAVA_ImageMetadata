@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.print.attribute.standard.MediaSize.ISO;
+
 import org.apache.commons.imaging.ImageReadException;
 import org.apache.commons.imaging.ImageWriteException;
 import org.apache.commons.imaging.Imaging;
@@ -23,6 +25,25 @@ import org.apache.commons.imaging.formats.tiff.write.TiffOutputSet;
 public class ImagesImpl implements ImagesService {
 	
 	UtilitiesServcie utilitiesServcie;
+	
+	private static final int CAMERA_MAKER = 271;
+	private static final int CAMERA_MODEL = 272;
+	private static final int F_STOP = 33437;
+	private static final int EXPOSURE_TIME = 33434;
+	private static final int ISO_SPEED = 34855;
+	private static final int EXPOSURE_COMPENSATION = 37380;
+	private static final int FOCAL_LENGTH = 37386;
+	private static final int MAX_APERTURE = 37381;
+	private static final int METERING_MODE = 37383;
+	private static final int FLASH_MODE = 37385;
+	private static final int DATE_TIME = 306;
+	private static final int EXPOSURE_PROGRAM = 41986;
+	private static final int SATURATION = 41993;
+	private static final int SHARPENESS = 41994;
+	private static final int WHITE_BALANCE = 41987;
+	private static final int DATE_TIME_ORIGINAL = 36867;
+	private static final int DATE_TIME_DIGITIZED = 36868;
+	
 	
 	public ImagesImpl(){
 		utilitiesServcie =new UtilitiesImpl();		
@@ -89,10 +110,78 @@ public class ImagesImpl implements ImagesService {
             // TagInfo constants often contain a description of what
             // directories are associated with a given tag.
 			exifDirectory = tiffOutputSet.getOrCreateExifDirectory();
-			exifDirectory.removeField(ExifTagConstants.EXIF_TAG_FNUMBER);
-			exifDirectory.add(ExifTagConstants.EXIF_TAG_FNUMBER, RationalNumber.valueOf(utilitiesServcie.getStringNumberWhenParenthesis(mapExif.get(33437).toString())));
-		
 			
+			if(mapExif.containsKey(F_STOP) && mapExif.get(F_STOP) != null ){
+				exifDirectory.removeField(ExifTagConstants.EXIF_TAG_FNUMBER);
+				exifDirectory.add(ExifTagConstants.EXIF_TAG_FNUMBER, RationalNumber.valueOf(utilitiesServcie.getStringNumberWhenParenthesis(mapExif.get(F_STOP).toString())));
+			}
+			System.out.println(mapExif);
+			if(mapExif.containsKey(EXPOSURE_TIME) && mapExif.get(EXPOSURE_TIME) != null ){
+				exifDirectory.removeField(ExifTagConstants.EXIF_TAG_EXPOSURE_TIME);
+				exifDirectory.add(ExifTagConstants.EXIF_TAG_EXPOSURE_TIME, RationalNumber.valueOf(utilitiesServcie.getStringNumberWhenParenthesis(mapExif.get(EXPOSURE_TIME).toString())));
+			}
+			
+			if(mapExif.containsKey(ISO_SPEED) && mapExif.get(ISO_SPEED) != null ){
+				exifDirectory.removeField(ExifTagConstants.EXIF_TAG_ISO);
+				exifDirectory.add(ExifTagConstants.EXIF_TAG_ISO, (Short)mapExif.get(ISO_SPEED));
+			}
+			
+			if(mapExif.containsKey(EXPOSURE_COMPENSATION) && mapExif.get(EXPOSURE_COMPENSATION) != null ){
+				exifDirectory.removeField(ExifTagConstants.EXIF_TAG_EXPOSURE_COMPENSATION);
+				exifDirectory.add(ExifTagConstants.EXIF_TAG_EXPOSURE_COMPENSATION, RationalNumber.valueOf(utilitiesServcie.getStringNumberWhenParenthesis(mapExif.get(EXPOSURE_COMPENSATION).toString())));
+			}
+			
+			if(mapExif.containsKey(FOCAL_LENGTH) && mapExif.get(FOCAL_LENGTH) != null ){
+				exifDirectory.removeField(ExifTagConstants.EXIF_TAG_FOCAL_LENGTH);
+				exifDirectory.add(ExifTagConstants.EXIF_TAG_FOCAL_LENGTH, RationalNumber.valueOf(utilitiesServcie.getStringNumberWhenParenthesis(mapExif.get(FOCAL_LENGTH).toString())));
+			}
+			
+			if(mapExif.containsKey(MAX_APERTURE) && mapExif.get(MAX_APERTURE) != null ){
+				exifDirectory.removeField(ExifTagConstants.EXIF_TAG_MAX_APERTURE_VALUE);
+				exifDirectory.add(ExifTagConstants.EXIF_TAG_MAX_APERTURE_VALUE, RationalNumber.valueOf(utilitiesServcie.getStringNumberWhenParenthesis(mapExif.get(MAX_APERTURE).toString())));
+			}
+			
+			if(mapExif.containsKey(METERING_MODE) && mapExif.get(METERING_MODE) != null ){
+				exifDirectory.removeField(ExifTagConstants.EXIF_TAG_METERING_MODE);
+				exifDirectory.add(ExifTagConstants.EXIF_TAG_METERING_MODE, (Short)mapExif.get(METERING_MODE));
+			}
+			
+			if(mapExif.containsKey(FLASH_MODE) && mapExif.get(FLASH_MODE) != null ){			
+				exifDirectory.removeField(ExifTagConstants.EXIF_TAG_FLASH);
+				exifDirectory.add(ExifTagConstants.EXIF_TAG_FLASH, (Short)mapExif.get(FLASH_MODE));
+			}	
+			
+		    if(mapExif.containsKey(EXPOSURE_PROGRAM) && mapExif.get(EXPOSURE_PROGRAM) != null ){
+				exifDirectory.removeField(ExifTagConstants.EXIF_TAG_EXPOSURE_MODE);
+				exifDirectory.add(ExifTagConstants.EXIF_TAG_EXPOSURE_MODE, (Short)mapExif.get(EXPOSURE_PROGRAM));
+		    }
+		    
+			if(mapExif.containsKey(SATURATION) && mapExif.get(SATURATION) != null ){
+				exifDirectory.removeField(ExifTagConstants.EXIF_TAG_SATURATION_1);
+				exifDirectory.add(ExifTagConstants.EXIF_TAG_SATURATION_1, (Short)mapExif.get(SATURATION));
+			}
+			
+			if(mapExif.containsKey(SHARPENESS) && mapExif.get(SHARPENESS) != null ){
+				exifDirectory.removeField(ExifTagConstants.EXIF_TAG_SHARPNESS_1);
+				exifDirectory.add(ExifTagConstants.EXIF_TAG_SHARPNESS_1, (Short)mapExif.get(SHARPENESS));
+			}
+			
+			if(mapExif.containsKey(WHITE_BALANCE) && mapExif.get(WHITE_BALANCE) != null ){
+				exifDirectory.removeField(ExifTagConstants.EXIF_TAG_WHITE_BALANCE_1);
+				exifDirectory.add(ExifTagConstants.EXIF_TAG_WHITE_BALANCE_1, (Short)mapExif.get(WHITE_BALANCE));
+			}
+			
+			if(mapExif.containsKey(DATE_TIME_ORIGINAL) && mapExif.get(DATE_TIME_ORIGINAL) != null ){			
+				exifDirectory.removeField(ExifTagConstants.EXIF_TAG_DATE_TIME_ORIGINAL);
+				exifDirectory.add(ExifTagConstants.EXIF_TAG_DATE_TIME_ORIGINAL, (String)mapExif.get(DATE_TIME_ORIGINAL));
+			}
+			
+			if(mapExif.containsKey(DATE_TIME_DIGITIZED) && mapExif.get(DATE_TIME_DIGITIZED) != null ){
+				exifDirectory.removeField(ExifTagConstants.EXIF_TAG_DATE_TIME_DIGITIZED);
+				exifDirectory.add(ExifTagConstants.EXIF_TAG_DATE_TIME_DIGITIZED, (String)mapExif.get(DATE_TIME_DIGITIZED));
+			}
+			
+			//ROOT DIRECTORY
 			exifDirectory = tiffOutputSet.getOrCreateRootDirectory();
 	        exifDirectory.removeField(ExifTagConstants.EXIF_TAG_SOFTWARE);
 	        exifDirectory.add(ExifTagConstants.EXIF_TAG_SOFTWARE, "SomeKind");
