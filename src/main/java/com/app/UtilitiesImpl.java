@@ -1,12 +1,18 @@
 package com.app;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class UtilitiesImpl implements UtilitiesServcie {
 
 	public double getStringNumberWhenParenthesis(String mapExif) {
+		if(StringUtils.isNumeric(mapExif)){
+			return Double.parseDouble(mapExif);
+		}
 		String s = null;
 		if (mapExif.indexOf("(") > 0) {
 			s = mapExif.substring(0, mapExif.indexOf("(")).trim();
 		}
+
 		double one = 0, two = 0, result = 0;
 		if (s != null) {
 			try {

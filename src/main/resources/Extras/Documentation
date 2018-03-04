@@ -1,0 +1,175 @@
+Root:  (tiffImageData)
+		NewSubfileType: 1
+		ImageWidth: 160
+		ImageLength: 120
+		BitsPerSample: 8, 8, 8
+		Compression: 1
+		PhotometricInterpretation: 2
+		Make: 'NIKON CORPORATION'
+		Model: 'NIKON D5300'
+		PreviewImageStart: 168448
+		Orientation: 1
+		SamplesPerPixel: 3
+		RowsPerStrip: 120
+		PreviewImageLength: 57600
+		XResolution: 300
+		YResolution: 300
+		PlanarConfiguration: 1
+		ResolutionUnit: 2
+		Software: 'Ver.1.00'
+		DateTime: '2014:04:02 11:39:52'
+		SubIFDs: 226304, 226424, 226652
+		ReferenceBlackWhite: 0, 255, 0, 255, 0, 255
+		XMP: 60, 63, 120, 112, 97, 99, 107, 101, 116, 32, 98, 101, 103, 105, 110, 61, 34, -17, -69, -65, 34, 32, 105, 100, 61, 34, 87, 53, 77, 48, 77, 112, 67, 101, 104, 105, 72, 122, 114, 101, 83, 122, 78, 84, 99, 122, 107, 99, 57, 100, 34... (2048)
+		ExifOffset: 2544
+		GPSInfo: 167936
+		Unknown Tag (0x9003): '2014:04:02 11:39:52'
+		TIFF/EPStandardID: 1, 0, 0, 0
+
+	Exif: 
+		ExposureTime: 10/1600 (0.006)
+		FNumber: 56/10 (5.6)
+		ExposureProgram: 3
+		PhotographicSensitivity: 180
+		Unknown Tag (0x8830): 2
+		DateTimeOriginal: '2014:04:02 11:39:52'
+		DateTimeDigitized: '2014:04:02 11:39:52'
+		ExposureCompensation: 0
+		MaxApertureValue: 5
+		MeteringMode: 3
+		LightSource: 0
+		Flash: 0
+		FocalLength: 105
+		MakerNote: 78, 105, 107, 111, 110, 0, 2, 17, 0, 0, 73, 73, 42, 0, 8, 0, 0, 0, 63, 0, 1, 0, 7, 0, 4, 0, 0, 0, 48, 50, 49, 49, 2, 0, 3, 0, 2, 0, 0, 0, 0, 0, -76, 0, 4, 0, 2, 0, 8, 0, 0... (164848)
+		UserComment: ''
+		SubSecTime: '20'
+		SubSecTimeOriginal: '20'
+		SubSecTimeDigitized: '20'
+		SensingMethod: 2
+		FileSource: 3
+		SceneType: 1
+		CFAPattern: 2, 0, 2, 0, 0, 1, 1, 2
+		CustomRendered: 0
+		ExposureMode: 0
+		WhiteBalance: 0
+		DigitalZoomRatio: 1
+		FocalLengthIn35mmFormat: 157
+		SceneCaptureType: 1
+		GainControl: 0
+		Contrast: 0
+		Saturation: 0
+		Sharpness: 0
+		SubjectDistanceRange: 0
+
+	Gps: 
+
+
+
+
+
+
+
+TiffOutputSet {
+byteOrder: LITTLE_ENDIAN
+	directory 0: Root (0)
+		field 0: [TagInfo. tag: 254 (0xfe, name: NewSubfileType]
+		field 0: [TagInfo. tag: 256 (0x100, name: ImageWidth]
+		field 0: [TagInfo. tag: 257 (0x101, name: ImageLength]
+		field 0: [TagInfo. tag: 258 (0x102, name: BitsPerSample]
+		field 0: [TagInfo. tag: 259 (0x103, name: Compression]
+		field 0: [TagInfo. tag: 262 (0x106, name: PhotometricInterpretation]
+		field 0: [TagInfo. tag: 271 (0x10f, name: Make]
+		field 0: [TagInfo. tag: 272 (0x110, name: Model]
+		field 0: [TagInfo. tag: 274 (0x112, name: Orientation]
+		field 0: [TagInfo. tag: 277 (0x115, name: SamplesPerPixel]
+		field 0: [TagInfo. tag: 278 (0x116, name: RowsPerStrip]
+		field 0: [TagInfo. tag: 279 (0x117, name: PreviewImageLength]
+		field 0: [TagInfo. tag: 282 (0x11a, name: XResolution]
+		field 0: [TagInfo. tag: 283 (0x11b, name: YResolution]
+		field 0: [TagInfo. tag: 284 (0x11c, name: PlanarConfiguration]
+		field 0: [TagInfo. tag: 296 (0x128, name: ResolutionUnit]
+		field 0: [TagInfo. tag: 305 (0x131, name: Software]
+		field 0: [TagInfo. tag: 306 (0x132, name: DateTime]
+		field 0: [TagInfo. tag: 532 (0x214, name: ReferenceBlackWhite]
+		field 0: [TagInfo. tag: 700 (0x2bc, name: XMP]
+		field 0: [TagInfo. tag: -1 (0xffffffff, name: Unknown Tag]
+		field 0: [TagInfo. tag: 37398 (0x9216, name: TIFF/EPStandardID]
+	directory 1: Exif (-2)
+		field 1: [TagInfo. tag: 33434 (0x829a, name: ExposureTime]
+		field 1: [TagInfo. tag: 33437 (0x829d, name: FNumber]
+		field 1: [TagInfo. tag: 34850 (0x8822, name: ExposureProgram]
+		field 1: [TagInfo. tag: 34855 (0x8827, name: PhotographicSensitivity]
+		field 1: [TagInfo. tag: -1 (0xffffffff, name: Unknown Tag]
+		field 1: [TagInfo. tag: 36867 (0x9003, name: DateTimeOriginal]
+		field 1: [TagInfo. tag: 36868 (0x9004, name: DateTimeDigitized]
+		field 1: [TagInfo. tag: 37380 (0x9204, name: ExposureCompensation]
+		field 1: [TagInfo. tag: 37381 (0x9205, name: MaxApertureValue]
+		field 1: [TagInfo. tag: 37383 (0x9207, name: MeteringMode]
+		field 1: [TagInfo. tag: 37384 (0x9208, name: LightSource]
+		field 1: [TagInfo. tag: 37385 (0x9209, name: Flash]
+		field 1: [TagInfo. tag: 37386 (0x920a, name: FocalLength]
+		field 1: [TagInfo. tag: 37500 (0x927c, name: MakerNote]
+		field 1: [TagInfo. tag: 37510 (0x9286, name: UserComment]
+		field 1: [TagInfo. tag: 37520 (0x9290, name: SubSecTime]
+		field 1: [TagInfo. tag: 37521 (0x9291, name: SubSecTimeOriginal]
+		field 1: [TagInfo. tag: 37522 (0x9292, name: SubSecTimeDigitized]
+		field 1: [TagInfo. tag: 41495 (0xa217, name: SensingMethod]
+		field 1: [TagInfo. tag: 41728 (0xa300, name: FileSource]
+		field 1: [TagInfo. tag: 41729 (0xa301, name: SceneType]
+		field 1: [TagInfo. tag: 41730 (0xa302, name: CFAPattern]
+		field 1: [TagInfo. tag: 41985 (0xa401, name: CustomRendered]
+		field 1: [TagInfo. tag: 41986 (0xa402, name: ExposureMode]
+		field 1: [TagInfo. tag: 41987 (0xa403, name: WhiteBalance]
+		field 1: [TagInfo. tag: 41988 (0xa404, name: DigitalZoomRatio]
+		field 1: [TagInfo. tag: 41989 (0xa405, name: FocalLengthIn35mmFormat]
+		field 1: [TagInfo. tag: 41990 (0xa406, name: SceneCaptureType]
+		field 1: [TagInfo. tag: 41991 (0xa407, name: GainControl]
+		field 1: [TagInfo. tag: 41992 (0xa408, name: Contrast]
+		field 1: [TagInfo. tag: 41993 (0xa409, name: Saturation]
+		field 1: [TagInfo. tag: 41994 (0xa40a, name: Sharpness]
+		field 1: [TagInfo. tag: 41996 (0xa40c, name: SubjectDistanceRange]
+	directory 2: Gps (-3)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

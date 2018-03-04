@@ -18,6 +18,8 @@ import org.apache.commons.imaging.formats.tiff.TiffField;
 import org.apache.commons.imaging.formats.tiff.TiffImageMetadata;
 import org.apache.commons.imaging.formats.tiff.constants.ExifTagConstants;
 import org.apache.commons.imaging.formats.tiff.constants.Tiff4TagConstants;
+import org.apache.commons.imaging.formats.tiff.constants.TiffDirectoryType;
+import org.apache.commons.imaging.formats.tiff.taginfos.TagInfoAscii;
 import org.apache.commons.imaging.formats.tiff.taginfos.TagInfoRational;
 import org.apache.commons.imaging.formats.tiff.write.TiffOutputDirectory;
 import org.apache.commons.imaging.formats.tiff.write.TiffOutputSet;
@@ -37,12 +39,16 @@ public class ImagesImpl implements ImagesService {
 	private static final int METERING_MODE = 37383;
 	private static final int FLASH_MODE = 37385;
 	private static final int DATE_TIME = 306;
-	private static final int EXPOSURE_PROGRAM = 41986;
+	private static final int EXPOSURE_PROGRAM = 34850;
 	private static final int SATURATION = 41993;
 	private static final int SHARPENESS = 41994;
 	private static final int WHITE_BALANCE = 41987;
 	private static final int DATE_TIME_ORIGINAL = 36867;
 	private static final int DATE_TIME_DIGITIZED = 36868;
+	
+	//Root Tag Constants 
+	final TagInfoAscii EXIF_TAG_MAKER = new TagInfoAscii("Software", 0x10f, -1,TiffDirectoryType.EXIF_DIRECTORY_IFD0);
+	final TagInfoAscii EXIF_TAG_MODEL = new TagInfoAscii("Software", 0x110, -1,TiffDirectoryType.EXIF_DIRECTORY_IFD0);
 	
 	
 	public ImagesImpl(){
@@ -115,7 +121,7 @@ public class ImagesImpl implements ImagesService {
 				exifDirectory.removeField(ExifTagConstants.EXIF_TAG_FNUMBER);
 				exifDirectory.add(ExifTagConstants.EXIF_TAG_FNUMBER, RationalNumber.valueOf(utilitiesServcie.getStringNumberWhenParenthesis(mapExif.get(F_STOP).toString())));
 			}
-			System.out.println(mapExif);
+			
 			if(mapExif.containsKey(EXPOSURE_TIME) && mapExif.get(EXPOSURE_TIME) != null ){
 				exifDirectory.removeField(ExifTagConstants.EXIF_TAG_EXPOSURE_TIME);
 				exifDirectory.add(ExifTagConstants.EXIF_TAG_EXPOSURE_TIME, RationalNumber.valueOf(utilitiesServcie.getStringNumberWhenParenthesis(mapExif.get(EXPOSURE_TIME).toString())));
@@ -134,6 +140,7 @@ public class ImagesImpl implements ImagesService {
 			if(mapExif.containsKey(FOCAL_LENGTH) && mapExif.get(FOCAL_LENGTH) != null ){
 				exifDirectory.removeField(ExifTagConstants.EXIF_TAG_FOCAL_LENGTH);
 				exifDirectory.add(ExifTagConstants.EXIF_TAG_FOCAL_LENGTH, RationalNumber.valueOf(utilitiesServcie.getStringNumberWhenParenthesis(mapExif.get(FOCAL_LENGTH).toString())));
+				System.out.println(RationalNumber.valueOf(utilitiesServcie.getStringNumberWhenParenthesis(mapExif.get(FOCAL_LENGTH).toString())));	
 			}
 			
 			if(mapExif.containsKey(MAX_APERTURE) && mapExif.get(MAX_APERTURE) != null ){
@@ -152,8 +159,8 @@ public class ImagesImpl implements ImagesService {
 			}	
 			
 		    if(mapExif.containsKey(EXPOSURE_PROGRAM) && mapExif.get(EXPOSURE_PROGRAM) != null ){
-				exifDirectory.removeField(ExifTagConstants.EXIF_TAG_EXPOSURE_MODE);
-				exifDirectory.add(ExifTagConstants.EXIF_TAG_EXPOSURE_MODE, (Short)mapExif.get(EXPOSURE_PROGRAM));
+				exifDirectory.removeField(ExifTagConstants.EXIF_TAG_EXPOSURE_PROGRAM);
+				exifDirectory.add(ExifTagConstants.EXIF_TAG_EXPOSURE_PROGRAM, (Short)mapExif.get(EXPOSURE_PROGRAM));				
 		    }
 		    
 			if(mapExif.containsKey(SATURATION) && mapExif.get(SATURATION) != null ){
@@ -181,11 +188,20 @@ public class ImagesImpl implements ImagesService {
 				exifDirectory.add(ExifTagConstants.EXIF_TAG_DATE_TIME_DIGITIZED, (String)mapExif.get(DATE_TIME_DIGITIZED));
 			}
 			
+	        	
 			//ROOT DIRECTORY
-			exifDirectory = tiffOutputSet.getOrCreateRootDirectory();
-	        exifDirectory.removeField(ExifTagConstants.EXIF_TAG_SOFTWARE);
-	        exifDirectory.add(ExifTagConstants.EXIF_TAG_SOFTWARE, "SomeKind");
-			
+			if(mapExif.containsKey(CAMERA_MAKER) && mapExif.get(CAMERA_MAKER) != null ){				
+				exifDirectory = tiffOutputSet.getOrCreateRootDirectory();
+		        exifDirectory.removeField(EXIF_TAG_MAKER);
+		        exifDirectory.add(EXIF_TAG_MAKER, (String)mapExif.get(CAMERA_MAKER));
+			}
+			if(mapExif.containsKey(CAMERA_MODEL) && mapExif.get(CAMERA_MODEL) != null ){				
+				exifDirectory = tiffOutputSet.getOrCreateRootDirectory();
+		        exifDirectory.removeField(EXIF_TAG_MODEL);
+		        exifDirectory.add(EXIF_TAG_MODEL, (String)mapExif.get(CAMERA_MODEL));
+			}
+	        
+
 			
 		} catch (ImageWriteException e1) {
 			e1.printStackTrace();
