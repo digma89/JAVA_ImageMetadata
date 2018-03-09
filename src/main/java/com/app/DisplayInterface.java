@@ -22,6 +22,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLayeredPane;
+import java.awt.Font;
 
 public class DisplayInterface {
 
@@ -36,6 +37,8 @@ public class DisplayInterface {
 	private JTextField tf_setMeta_album;
 	private JTextField tf_setMeta_year;
 	private JTextField tf_setMeta_genre;
+	private JTextField txtNef;
+	private JTextField txtJpg;
 	
 	/**
 	 * Launch the application.
@@ -66,70 +69,94 @@ public class DisplayInterface {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 700, 325);
+		frame.setBounds(100, 100, 828, 441);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
 		
 		/*One TabbedPane with two JPanels inside*/
 		JTabbedPane ImageMetadataApp = new JTabbedPane(JTabbedPane.TOP);
 		frame.getContentPane().add(ImageMetadataApp, "name_4649520257744");
-		
-			//Panel 1 Copy the metadata
-			JPanel copyMetadata = new JPanel();
-			ImageMetadataApp.addTab("Copy Metadata", null, copyMetadata, null);
 			
-				//BTN select source folder in file
-				JButton btn_setFile_sourceFolder = new JButton("Source folder");
-					btn_setFile_sourceFolder.setBounds(12, 13, 109, 31);
+				//Panel 1 Copy the metadata
+				JPanel copyMetadata = new JPanel();
+				ImageMetadataApp.addTab("Copy Metadata", null, copyMetadata, null);
+				copyMetadata.setLayout(null);
+				lbl_setFile_sourceFolder.setBounds(227, 36, 538, 35);
+				copyMetadata.add(lbl_setFile_sourceFolder);		
+					lbl_setFile_resultFolder.setBounds(227, 83, 549, 35);
+					copyMetadata.add(lbl_setFile_resultFolder);
+				
+					//BTN select source folder in file
+					JButton btn_setFile_sourceFolder = new JButton("Source folder");
+					btn_setFile_sourceFolder.setBounds(49, 36, 157, 35);
 					copyMetadata.add(btn_setFile_sourceFolder);
 					btn_setFile_sourceFolder.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
 							lbl_setFile_sourceFolder.setText(fileChooser());
 						}
 					});				
-					lbl_setFile_sourceFolder.setBounds(133, 17, 532, 21);
-					copyMetadata.add(lbl_setFile_sourceFolder);		
-				
-				//BTN select result folder in file
-				JButton btn_setFile_ResultFolder = new JButton("Result folder");
-					btn_setFile_ResultFolder.setBounds(12, 57, 109, 31);
+					
+					//BTN select result folder in file
+					JButton btn_setFile_ResultFolder = new JButton("Result folder");
+					btn_setFile_ResultFolder.setBounds(49, 83, 157, 35);
 					copyMetadata.add(btn_setFile_ResultFolder);
 					btn_setFile_ResultFolder.addActionListener(new ActionListener() {			
 						public void actionPerformed(ActionEvent arg0) {
 							lbl_setFile_resultFolder.setText(fileChooser());				
 						}
 					});				
-					lbl_setFile_resultFolder.setBounds(133, 64, 532, 21);
-					copyMetadata.add(lbl_setFile_resultFolder);
-			
-			
-				//BTN Run in file
-				JButton btn_setFile_run = new JButton("Run");
-					btn_setFile_run.setBounds(556, 204, 109, 31);
-					copyMetadata.add(btn_setFile_run);
-					btn_setFile_run.addActionListener(new ActionListener() {			
-						public void actionPerformed(ActionEvent arg0) {
-							String sourceFolder = lbl_setFile_sourceFolder.getText().trim();
-							String resultFolder = lbl_setFile_resultFolder.getText().trim();
-							
-							if(sourceFolder != "" && resultFolder != ""){	
-								sourceFolder += "/";
-								resultFolder += "/";
-								Main backend  = new Main();
-								try {
-									backend.setMetaData(sourceFolder, resultFolder);
-									//JOptionPane.showMessageDialog(frame, "Complete");
-								} catch (Exception e) {
-									JOptionPane.showMessageDialog(frame, e.getMessage());
-									e.printStackTrace();
-								}			
+					
+					final JLabel lblRawImage = new JLabel("RAW Image format");
+					lblRawImage.setBounds(49, 139, 152, 22);
+					lblRawImage.setFont(new Font("Tahoma", Font.PLAIN, 18));
+					copyMetadata.add(lblRawImage);
+					
+					txtNef = new JTextField();
+					txtNef.setBounds(222, 133, 96, 32);
+					txtNef.setText("NEF");
+					copyMetadata.add(txtNef);
+					txtNef.setColumns(5);
+					
+					final JLabel lblImageResult = new JLabel("Image Result format");
+					lblImageResult.setBounds(49, 188, 162, 22);
+					lblImageResult.setFont(new Font("Tahoma", Font.PLAIN, 18));
+					copyMetadata.add(lblImageResult);
+					
+					txtJpg = new JTextField();
+					txtJpg.setBounds(221, 182, 96, 32);
+					txtJpg.setText("jpg");
+					copyMetadata.add(txtJpg);
+					txtJpg.setColumns(5);
+					
+					
+						//BTN Run in file
+						JButton btn_setFile_run = new JButton("Run");
+						btn_setFile_run.setBounds(619, 249, 146, 35);
+						copyMetadata.add(btn_setFile_run);
+						btn_setFile_run.addActionListener(new ActionListener() {			
+							public void actionPerformed(ActionEvent arg0) {
+								String sourceFolder = lbl_setFile_sourceFolder.getText().trim();
+								String resultFolder = lbl_setFile_resultFolder.getText().trim();
+								String rawImageLbl = "." +txtNef.getText().trim();
+								String imageResultLbl = "." +txtJpg.getText().trim();
 								
-							}else{
-								JOptionPane.showMessageDialog(frame, "Please select source and result folder");
-							}	
-							
-						}
-					});
+								if(sourceFolder != "" && resultFolder != ""){	
+									sourceFolder += "/";
+									resultFolder += "/";
+									Main backend  = new Main();
+									try {
+										backend.setMetaData(sourceFolder, resultFolder,rawImageLbl,imageResultLbl);
+										//JOptionPane.showMessageDialog(frame, "Complete");
+									} catch (Exception e) {
+										JOptionPane.showMessageDialog(frame,"There was an error" +e.getMessage());
+										e.printStackTrace();
+									}			
+									JOptionPane.showMessageDialog(frame, "The metadata was copied");	
+								}else{
+									JOptionPane.showMessageDialog(frame, "Please select source and result folder");
+								}									
+							}
+						});
 			
 			//Panel 2 
 			JPanel panel_1 = new JPanel();

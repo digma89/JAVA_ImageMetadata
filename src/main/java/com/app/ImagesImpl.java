@@ -140,7 +140,6 @@ public class ImagesImpl implements ImagesService {
 			if(mapExif.containsKey(FOCAL_LENGTH) && mapExif.get(FOCAL_LENGTH) != null ){
 				exifDirectory.removeField(ExifTagConstants.EXIF_TAG_FOCAL_LENGTH);
 				exifDirectory.add(ExifTagConstants.EXIF_TAG_FOCAL_LENGTH, RationalNumber.valueOf(utilitiesServcie.getStringNumberWhenParenthesis(mapExif.get(FOCAL_LENGTH).toString())));
-				System.out.println(RationalNumber.valueOf(utilitiesServcie.getStringNumberWhenParenthesis(mapExif.get(FOCAL_LENGTH).toString())));	
 			}
 			
 			if(mapExif.containsKey(MAX_APERTURE) && mapExif.get(MAX_APERTURE) != null ){
